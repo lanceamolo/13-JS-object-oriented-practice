@@ -50,24 +50,32 @@ function expect(target) {
 //
 // Only add code to *THIS* section!
 
-function Dog(x, y) {
+function Dog(object) {
   this.status = "normal"
-  this.color = "black"
-  this.hungry = true
+  if (object) {
+    this.color = object.color
+  }
+  if (object) {
+    if (object.hasOwnProperty("hungry")) {
+      this.hungry = object.hungry
+    } else {
+      this.hungry = true
+    }
+  }
 }
-
-Human.prototype.pet = function () {
-  sadie.status = "happy"
-  sadie.hungry = false
-  mason.cool = false
-}
-
-Human.prototype.feed = function () {
-  moonshine.hungry = false
-}
-
-function Human(x, y) {
+function Human(object) {
   this.cool = true
+  if (object) {
+    if (object.hasOwnProperty("cool")) this.cool = true
+  } else {
+    this.cool = false
+  }
+}
+Human.prototype.feed = function (Dog) {
+  Dog.hungry = false
+}
+Human.prototype.pet = function (Dog) {
+  Dog.status = "happy"
 }
 
 //        __
